@@ -1,0 +1,19 @@
+
+{
+"pages":{
+    "connexion_page":
+    {
+      "Time_at_Work_label":"Time at Work", 
+      "Self_Review_label" :"(1) Pending Self Review'",
+      "Connexion_error":"Invalid credentials"
+
+    },
+  "AddNewCandidatePage":  {
+        "CheckCandidateName":"djamel yousfi",
+        "CheckVancancy":"Junior Account Assistant"
+    },
+      "singnup_page":  {
+     "ReturnFormMessage":"message"
+    }
+ }
+}

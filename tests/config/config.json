@@ -1,0 +1,21 @@
+{
+"environnements":{
+    "test":
+    {
+        "baseURL":"www_test",
+        "username":"user_test",
+        "password":"password_test"
+    },
+    "uat":  {
+        "baseURL":"www_uat",
+        "username":"user_uat",
+        "password":"password_uat"
+    },
+    "preprod":  {
+        "baseURL":"www_preprod",
+        "username":"user_preprod",
+        "password":"password_preprod"
+    }
+}
+
+}
