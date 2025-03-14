@@ -10,8 +10,6 @@ class ConnexionPage {
   Self_Review_label: Locator;
   Connexion_error: Locator;
 
-
-
   constructor(page) {
     this.page = page;
 
@@ -19,14 +17,16 @@ class ConnexionPage {
     this.username = page.locator('input[name="username"]');
     this.pawwwordField = page.locator('input[name="password"]');
     this.loginButton = page.locator("//*/button");
-    this.Connexion_error = page.locator('//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/div/div[1]/div[1]/p' );
-   this.Time_at_Work_label = page.locator("#app");
-   this.Self_Review_label = page.locator("#app");
+    this.Connexion_error = page.locator(
+      '//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/div/div[1]/div[1]/p'
+    );
+    this.Time_at_Work_label = page.locator("#app");
+    this.Self_Review_label = page.locator("#app");
   }
 
-  async Connexion(email, pawwword) {
-    await this.username.fill(email);
-    await this.pawwwordField.fill(pawwword);
+  async Connexion(username, pawwwordField) {
+    await this.username.fill(username);
+    await this.pawwwordField.fill(pawwwordField);
     await this.loginButton.click();
   }
 }

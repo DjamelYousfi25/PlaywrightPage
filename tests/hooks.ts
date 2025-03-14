@@ -16,6 +16,10 @@ afterAll(async () => {
 });
 
 beforeAll(async () => {
+
+  if (!fs.existsSync(screenshotsDir)) {
+    fs.mkdirSync(screenshotsDir, { recursive: true });
+  }
   if (fs.existsSync(screenshotsDir)) {
     // Lire tous les fichiers du dossier
     const files = fs.readdirSync(screenshotsDir);
