@@ -24,9 +24,10 @@ class ConnexionPage {
     this.Self_Review_label = page.locator("#app");
   }
 
-  async Connexion(username, pawwwordField) {
-    await this.username.fill(username);
-    await this.pawwwordField.fill(pawwwordField);
+  async Connexion(username, passwordField) {
+    await this.username.fill(username);  
+    await this.pawwwordField.fill(passwordField);
+    console.log(`username est ${username} et password ets ${passwordField}`);
     await this.loginButton.click();
   }
 }
