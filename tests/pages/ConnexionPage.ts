@@ -4,7 +4,7 @@ class ConnexionPage {
   page: Page; // Déclarer la propriété 'page' avec son type
 
   username: Locator;
-  pawwwordField: Locator;
+  passwordField: Locator;
   loginButton: Locator;
   Time_at_Work_label: Locator;
   Self_Review_label: Locator;
@@ -15,7 +15,7 @@ class ConnexionPage {
 
     //*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/form/div[1]/div/div[2]/input
     this.username = page.locator('input[name="username"]');
-    this.pawwwordField = page.locator('input[name="password"]');
+    this.passwordField = page.locator('input[name="password"]');
     this.loginButton = page.locator("//*/button");
     this.Connexion_error = page.locator(
       '//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/div/div[1]/div[1]/p'
@@ -25,8 +25,9 @@ class ConnexionPage {
   }
 
   async Connexion(username, passwordField) {
+    await this.username.isVisible();
     await this.username.fill(username);  
-    await this.pawwwordField.fill(passwordField);
+    await this.passwordField.fill(passwordField);
     console.log(`username est ${username} et password ets ${passwordField}`);
     await this.loginButton.click();
   }
