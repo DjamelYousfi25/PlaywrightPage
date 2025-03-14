@@ -14,8 +14,8 @@ afterAll(async () => {
 
 });
 
+//Ici le beforeAll lit toutes les sceenshot existant et les supprime
 beforeAll(async () => {
-
 
   if (fs.existsSync(screenshotsDir)) {
     // Lire tous les fichiers du dossier
@@ -27,22 +27,19 @@ beforeAll(async () => {
       fs.unlinkSync(filePath); // Supprimer le fichier
     }
 
-    console.log("Tous les screenshots ont été supprimés.");
   } else {
 
   }
 });
 
+//Exécuté avant chaque test du groupe
 beforeEach(async ({ page }) => {
   
-  console.log("Exécuté avant chaque test du groupe");
   await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php");
 });
 afterEach(async ({ page }, testInfo) => {
-  console.log("Exécuté après chaque test du groupe");
-  if (testInfo.status === "failed") {
+    if (testInfo.status === "failed") {
     console.log(`Test failed: ${testInfo.title}. Capturing screenshot...`);
-
       if (!fs.existsSync(screenshotsDir)) {
         fs.mkdirSync(screenshotsDir, { recursive: true });
       }
@@ -57,10 +54,10 @@ afterEach(async ({ page }, testInfo) => {
       fullPage: true,
     });
 
-    console.log(`Screenshot saved to: ${screenshotPath}`);
+  
   }
   await page.close();
 });
 
-// Exporter les hooks si nécessaire
+// Exporter les hooks 
 module.exports = { beforeAll, afterAll, beforeEach, afterEach };
