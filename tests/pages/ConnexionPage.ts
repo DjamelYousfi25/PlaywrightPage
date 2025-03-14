@@ -14,7 +14,8 @@ class ConnexionPage {
     this.page = page;
 
     //*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/form/div[1]/div/div[2]/input
-    this.username = page.locator('input[name="username"]');
+    //  this.username = page.locator('input[name="username"]');
+    this.username = page.locator('//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/form/div[1]/div/div[2]/input');
     this.passwordField = page.locator('input[name="password"]');
     this.loginButton = page.locator("//*/button");
     this.Connexion_error = page.locator(
