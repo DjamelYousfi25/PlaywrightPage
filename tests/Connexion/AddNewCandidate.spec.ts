@@ -24,7 +24,7 @@ describe("Vérification de l'envoi du formulaire", () => {
       candidatedata.email,
       candidatedata.number_phone
     );
-   
+     await addNewCandidatePage.fullNameCheck.waitFor({ state: "visible" });
     await expect(addNewCandidatePage.fullNameCheck).toContainText(
       dataExpect.pages.AddNewCandidatePage.CheckCandidateName
     );

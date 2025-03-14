@@ -11,15 +11,12 @@ const screenshotsDir = path.join(__dirname, "screenshots");
 
 // Hook exécuté après tous les tests
 afterAll(async () => {
-  console.log("Fin de tous les tests");
-  //ici je vais creer une methode qui compresse les capture d'ecran
+
 });
 
 beforeAll(async () => {
 
-  if (!fs.existsSync(screenshotsDir)) {
-    fs.mkdirSync(screenshotsDir, { recursive: true });
-  }
+
   if (fs.existsSync(screenshotsDir)) {
     // Lire tous les fichiers du dossier
     const files = fs.readdirSync(screenshotsDir);
@@ -32,7 +29,7 @@ beforeAll(async () => {
 
     console.log("Tous les screenshots ont été supprimés.");
   } else {
-    console.log("Le dossier screenshots n'existe pas.");
+
   }
 });
 
@@ -46,7 +43,9 @@ afterEach(async ({ page }, testInfo) => {
   if (testInfo.status === "failed") {
     console.log(`Test failed: ${testInfo.title}. Capturing screenshot...`);
 
-
+      if (!fs.existsSync(screenshotsDir)) {
+        fs.mkdirSync(screenshotsDir, { recursive: true });
+      }
 
     // Prendre une capture d'écran et la sauvegarder dans un fichier
      const screenshotPath = path.join(
