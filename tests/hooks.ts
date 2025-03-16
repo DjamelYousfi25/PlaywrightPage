@@ -17,7 +17,7 @@ afterAll(async () => {
 //Ici le beforeAll lit toutes les sceenshot existant et les supprime
 beforeAll(async () => {
 
-  if (fs.existsSync(screenshotsDir)) {
+ /* if (fs.existsSync(screenshotsDir)) {
     // Lire tous les fichiers du dossier
     const files = fs.readdirSync(screenshotsDir);
 
@@ -29,14 +29,15 @@ beforeAll(async () => {
 
   } else {
 
-  }
+  }*/
 });
 
 //Exécuté avant chaque test du groupe
 beforeEach(async ({ page }) => {
   
-  await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php");
+  await page.goto("/");
 });
+
 afterEach(async ({ page }, testInfo) => {
     if (testInfo.status === "failed") {
     console.log(`Test failed: ${testInfo.title}. Capturing screenshot...`);

@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import ConnexionPage from "../pages/ConnexionPage";
-import CommunFunctions from "../CommunFunctions/communFunctions";
+import CommunFunctions from "../Commun/communFunctions";
 import { describe } from "node:test";
 import AddNewCandidatePage from "../pages/AddNewCandidatePage";
 const candidatedata = require("../Jdd/CandidatData.json");
@@ -24,7 +24,7 @@ describe("Vérification de l'envoi du formulaire", () => {
       candidatedata.email,
       candidatedata.number_phone
     );
-     await addNewCandidatePage.fullNameCheck.waitFor({ state: "visible" });
+     await communfunction.ElementIsVisible(addNewCandidatePage.fullNameCheck);
     await expect(addNewCandidatePage.fullNameCheck).toContainText(
       dataExpect.pages.AddNewCandidatePage.CheckCandidateName
     );

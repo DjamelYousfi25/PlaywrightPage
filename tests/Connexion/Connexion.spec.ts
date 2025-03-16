@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import ConnexionPage from "../pages/ConnexionPage";
-import CommunFunctions from "../CommunFunctions/communFunctions";
+import CommunFunctions from "../Commun/communFunctions";
 import { describe } from "node:test";
 const logindata = require("../Jdd/loginData.json");
 const dataExpect = require("../expectedResult/expectedresult.json");
