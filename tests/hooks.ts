@@ -35,7 +35,7 @@ beforeAll(async () => {
 //Exécuté avant chaque test du groupe
 beforeEach(async ({ page }) => {
   
-  await page.goto("/");
+  await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php");
 });
 
 afterEach(async ({ page }, testInfo) => {

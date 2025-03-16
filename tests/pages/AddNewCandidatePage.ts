@@ -1,4 +1,5 @@
 import { Page, Locator, expect } from "@playwright/test";
+import { selectors } from "../Commun/Selectors";
 const path = require("path");
 const fs = require("fs");
 
@@ -20,31 +21,31 @@ class AddNewCandidatePage {
 
   constructor(page: Page) {
     this.page = page;
-    this.recruitmentLink = page.locator(
-      '//*[@id="app"]/div[1]/div[1]/aside/nav/div[2]/ul/li[5]/a/span'
-    );
-    this.addButton = page.locator('button:text("Add")');
-    this.firstName = page.locator('input[name="firstName"]');
-    this.lastName = page.locator('input[name="lastName"]');
-    this.vacancyDropdownIcon = page.locator("form i").first();
-    this.vacancyOption = page.locator(
-      'div[role="option"]:has-text("Senior QA Lead")'
-    );
-    this.email = page.locator(
-      '//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[3]/div/div[1]/div/div[2]/input'
-    );
-    this.phoneNumber = page.locator(
-      '//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[3]/div/div[2]/div/div[2]/input'
-    );
-    this.browseButton = page.locator('input[type="file"]');
-    this.saveButton = page.locator('button:text("Save")');
-    this.fullNameCheck = page.locator("#app");
+
+    // Définir les locators en utilisant les sélecteurs
+    this.recruitmentLink = page.locator(selectors.recrutementLink);
+    this.addButton = page.locator(selectors.addButton);
+    this.firstName = page.locator(selectors.firstName);
+    this.lastName = page.locator(selectors.lastName);
+    this.vacancyDropdownIcon = page
+      .locator(selectors.vacancyDropdownIcon)
+      .first();
+    this.vacancyOption = page.locator(selectors.vacancyOption);
+    this.email = page.locator(selectors.email);
+    this.phoneNumber = page.locator(selectors.phoneNumber);
+    this.browseButton = page.locator(selectors.browseButton);
+    this.saveButton = page.locator(selectors.saveButton);
+    this.fullNameCheck = page.locator(selectors.fullNameCheck);
   }
 
-  async goToViewCandidatesPage() {
-    await this.recruitmentLink.click();
-  }
 
+  /**
+   * Ajoute un nouveau candidat avec les détails fournis.
+   * @param {string} firstname - Le prénom du candidat.
+   * @param {string} lastname - Le nom de famille du candidat.
+   * @param {string} email - L'email du candidat.
+   * @param {string} phoneNumber - Le numéro de téléphone du candidat.
+   */
   async addNewCandidate(
     firstname: string,
     lastname: string,
@@ -62,8 +63,8 @@ class AddNewCandidatePage {
     await this.lastName.fill(lastname);
     await this.vacancyDropdownIcon.click();
     await this.vacancyOption.click();
-    await this.email.fill(email);
-    await this.phoneNumber.fill(phoneNumber);
+    await this.email.first().fill(email);
+    await this.phoneNumber.nth(1).fill(phoneNumber);
     await this.browseButton.setInputFiles(filePath);
     await this.saveButton.click();
   }
