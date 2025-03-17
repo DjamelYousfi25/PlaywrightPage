@@ -24,9 +24,9 @@ export const selectors = {
   phoneNumber: 'input[placeholder="Type here"]',
   browseButton: 'input[type="file"]',
   saveButton: 'button:has-text("Save")',
-  fullNameCheck: "#app",
+  fullNameCheck:'//form/div[1]/div[1]/div/div[2]/p',
 
   //logout
   accountName: '//*[@id="app"]//header//ul//p',
-  Logout: '//*[@id="app"]//header//ul/li/ul/li[4]/a'
+  Logout: '//*[@id="app"]//header//ul/li/ul/li[4]/a',
 };

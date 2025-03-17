@@ -5,6 +5,9 @@ const fs = require("fs");
 
 const filePath = path.join(__dirname, "../document/attentesApprenant.pdf");
 
+/**
+ * Classe représentant la page d'ajout d'un nouveau candidat.
+ */
 class AddNewCandidatePage {
   page: Page;
   recruitmentLink: Locator;
@@ -35,9 +38,8 @@ class AddNewCandidatePage {
     this.phoneNumber = page.locator(selectors.phoneNumber);
     this.browseButton = page.locator(selectors.browseButton);
     this.saveButton = page.locator(selectors.saveButton);
-    this.fullNameCheck = page.locator(selectors.fullNameCheck);
+    this.fullNameCheck = page.locator(selectors.fullNameCheck);;
   }
-
 
   /**
    * Ajoute un nouveau candidat avec les détails fournis.
@@ -51,22 +53,31 @@ class AddNewCandidatePage {
     lastname: string,
     email: string,
     phoneNumber: string
-  ) {
-    // Vérifier que le fichier existe
+  ) 
+  
+  {
     if (!fs.existsSync(filePath)) {
       throw new Error(`File not found: ${filePath}`);
     }
 
+      await this.addButton.waitFor({ state: "visible" });
+
     await this.addButton.click();
-    await expect(this.firstName).toBeVisible();
+    //atttendre que le firstname soit visible avant de le renseigner
+    await this.firstName.waitFor({ state: "visible" });
     await this.firstName.fill(firstname);
     await this.lastName.fill(lastname);
     await this.vacancyDropdownIcon.click();
+
+    await this.vacancyOption.waitFor({ state: "visible" });
     await this.vacancyOption.click();
     await this.email.first().fill(email);
     await this.phoneNumber.nth(1).fill(phoneNumber);
     await this.browseButton.setInputFiles(filePath);
+    await this.saveButton.waitFor({ state: "visible" });
     await this.saveButton.click();
+
+
   }
 }
 

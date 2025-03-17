@@ -9,56 +9,55 @@ const {
 } = require("@playwright/test");
 const screenshotsDir = path.join(__dirname, "screenshots");
 
-// Hook exécuté après tous les tests
+/**
+ * Hook exécuté après tous les tests.
+ */
 afterAll(async () => {
-
+  // Nettoyage après tous les tests
 });
 
-//Ici le beforeAll lit toutes les sceenshot existant et les supprime
+/**
+ * Hook exécuté avant tous les tests.
+ */
 beforeAll(async () => {
-
- /* if (fs.existsSync(screenshotsDir)) {
-    // Lire tous les fichiers du dossier
+  // Nettoyage des screenshots avant de commencer les tests
+  /* if (fs.existsSync(screenshotsDir)) {
     const files = fs.readdirSync(screenshotsDir);
-
-    // Supprimer chaque fichier
     for (const file of files) {
       const filePath = path.join(screenshotsDir, file);
-      fs.unlinkSync(filePath); // Supprimer le fichier
+      fs.unlinkSync(filePath);
     }
-
-  } else {
-
-  }*/
+  } */
 });
 
-//Exécuté avant chaque test du groupe
+/**
+ * Hook exécuté avant chaque test.
+ */
 beforeEach(async ({ page }) => {
-  
   await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php");
 });
 
+/**
+ * Hook exécuté après chaque test.
+ */
 afterEach(async ({ page }, testInfo) => {
-    if (testInfo.status === "failed") {
+  if (testInfo.status === "failed") {
     console.log(`Test failed: ${testInfo.title}. Capturing screenshot...`);
-      if (!fs.existsSync(screenshotsDir)) {
-        fs.mkdirSync(screenshotsDir, { recursive: true });
-      }
+    if (!fs.existsSync(screenshotsDir)) {
+      fs.mkdirSync(screenshotsDir, { recursive: true });
+    }
 
-    // Prendre une capture d'écran et la sauvegarder dans un fichier
-     const screenshotPath = path.join(
-       screenshotsDir,
-       `${testInfo.title}-${Date.now()}.png`
-     );
+    const screenshotPath = path.join(
+      screenshotsDir,
+      `${testInfo.title}-${Date.now()}.png`
+    );
     await page.screenshot({
       path: screenshotPath,
       fullPage: true,
     });
-
-  
   }
   await page.close();
 });
 
-// Exporter les hooks 
+// Exporter les hooks
 module.exports = { beforeAll, afterAll, beforeEach, afterEach };

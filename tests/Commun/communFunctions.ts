@@ -1,17 +1,28 @@
 import { Page, Locator } from "@playwright/test";
-import{selectors} from "./Selectors";
-class communFunctions {
-  //Methode commiune de connexion
-  static async login(page: Page, username: string, password: string) {
-      await page.waitForSelector(selectors.username);
-      await page.waitForSelector(selectors.password);
+import { selectors } from "./Selectors";
 
+/**
+ * Classe contenant des fonctions communes utilisées dans les tests.
+ */
+class CommunFunctions {
+  /**
+   * Méthode pour se connecter à l'application.
+   * @param {Page} page - L'instance de la page Playwright.
+   * @param {string} username - Le nom d'utilisateur.
+   * @param {string} password - Le mot de passe.
+   */
+  static async login(page: Page, username: string, password: string) {
+    await page.waitForSelector(selectors.username);
+    await page.waitForSelector(selectors.password);
     await page.fill(selectors.username, username);
     await page.fill(selectors.password, password);
     await page.click(selectors.loginButton);
   }
 
-  //Méthode commune de deco
+  /**
+   * Méthode pour se déconnecter de l'application.
+   * @param {Page} page - L'instance de la page Playwright.
+   */
   static async logout(page: Page) {
     await page.click(selectors.accountName);
     await page.waitForSelector(selectors.Logout);
@@ -20,22 +31,29 @@ class communFunctions {
 
   /**
    * Navigue vers la page de visualisation des candidats.
+   * @param {Page} page - L'instance de la page Playwright.
    */
-  static async goToViewCandidatesPage(page:Page) {
-   await page.click(selectors.recrutementLink);
+  static async goToViewCandidatesPage(page: Page) {
+    await page.click(selectors.recrutementLink);
   }
 
-  async ElementIsVisible(locator: Locator): Promise<boolean> {
+  /**
+   * Vérifie si un élément est visible.
+   * @param {Locator} locator - Le locator de l'élément à vérifier.
+   * @returns {Promise<boolean>} - True si l'élément est visible, sinon False.
+   */
+  async elementIsVisible(locator: Locator): Promise<boolean> {
     return await locator.isVisible();
   }
 
-  async ElementIsNotNotVisible(locator: Locator): Promise<boolean> {
+  /**
+   * Vérifie si un élément n'est pas visible.
+   * @param {Locator} locator - Le locator de l'élément à vérifier.
+   * @returns {Promise<boolean>} - True si l'élément n'est pas visible, sinon False.
+   */
+  async elementIsNotVisible(locator: Locator): Promise<boolean> {
     return !(await locator.isVisible());
   }
 }
-export default communFunctions;
 
-/*
-netstat -ano | findstr :9323
-taskkill /PID <PID> /F
-*/
+export default CommunFunctions;;
