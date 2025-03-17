@@ -8,6 +8,7 @@ const {
   afterEach,
 } = require("@playwright/test");
 const screenshotsDir = path.join(__dirname, "screenshots");
+console.log(screenshotsDir);
 
 /**
  * Hook exécuté après tous les tests.
