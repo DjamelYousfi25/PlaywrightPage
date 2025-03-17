@@ -1,6 +1,6 @@
 import { Page, Locator } from "@playwright/test";
 import { selectors } from "../Commun/Selectors";
-import CommunFunctions from "../Commun/communFunctions";
+import CommunFunctions from "../Commun/CommunFunctions";
 
 /**
  * Classe représentant la page de connexion.

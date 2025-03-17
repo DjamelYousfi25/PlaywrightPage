@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { describe } from "node:test";
-import ConnexionPage from "../pages/ConnexionPage";
-import CommunFunctions from "../Commun/communFunctions";
+import ConnexionPage from "../../pages/ConnexionPage";
+import CommunFunctions from "../../Commun/CommunFunctions";
 const logindata = require("../Jdd/loginData.json");
-const dataExpect = require("../expectedResult/expectedresult.json");
+const dataExpect = require("../ExpectedResult/expectedresult.json");
 const { beforeAll, afterAll, beforeEach, afterEach } = require("../hooks");
 
 describe("Vérification de la connexion", () => {

@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
-import CommunFunctions from "../Commun/communFunctions";
-import AddNewCandidatePage from "../pages/AddNewCandidatePage";
+import CommunFunctions from "../../Commun/CommunFunctions";
+import AddNewCandidatePage from "../../pages/AddNewCandidatePage";
 const candidatedata = require("../Jdd/CandidatData.json");
 const logindata = require("../Jdd/loginData.json");
-const dataExpect = require("../expectedResult/expectedresult.json");
+const dataExpect = require("../ExpectedResult/expectedresult.json");
 const { beforeAll, afterAll, beforeEach, afterEach } = require("../hooks");
 
 
