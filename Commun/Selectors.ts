@@ -6,6 +6,7 @@ export const selectors = {
   loginButton: 'button[type="submit"]', // Retourne une chaîne de caractères
   recrutementLink: '//*[@id="app"]//aside//li[5]/a', // Exemple de sélecteur pour un lien
   Time_at_Work_label: "#app", // Exemple de sélecteur pour un label
+  errorLogin:'//*[@id="app"]//div[1]/p',
 
   // Search Candidate page (view candidate)
   FullnameSearch: 'input[placeholder="Type for hints..."]',
