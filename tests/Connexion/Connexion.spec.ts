@@ -21,6 +21,7 @@ describe("Vérification de la connexion", () => {
     const connexionPage = new ConnexionPage(page);
     await connexionPage.login(logindata[1].username, logindata[1].password);
     await communfunction.elementIsNotVisible(connexionPage.Time_at_Work_label);
+   // await expect(connexionPage.check_connect_ok).toContainText("Quick Launch");
     await expect(connexionPage.errorLogin).toContainText(
       dataExpect.pages.connexion_page.Connexion_error
     );

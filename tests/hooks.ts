@@ -21,14 +21,7 @@ afterAll(async () => {
  * Hook exécuté avant tous les tests.
  */
 beforeAll(async () => {
-  // Nettoyage des screenshots avant de commencer les tests
-  /* if (fs.existsSync(screenshotsDir)) {
-    const files = fs.readdirSync(screenshotsDir);
-    for (const file of files) {
-      const filePath = path.join(screenshotsDir, file);
-      fs.unlinkSync(filePath);
-    }
-  } */
+
 });
 
 /**
