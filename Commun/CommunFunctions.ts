@@ -37,6 +37,10 @@ class CommunFunctions {
     await page.click(selectors.recrutementLink);
   }
 
+  static async goToViewEmployeePage(page: Page) {
+    await page.click(selectors.PimLink);
+  }
+
   /**
    * Vérifie si un élément est visible.
    * @param {Locator} locator - Le locator de l'élément à vérifier.

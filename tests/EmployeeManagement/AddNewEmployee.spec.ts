@@ -1,15 +1,21 @@
 import { test, expect } from "@playwright/test";
 import CommunFunctions from "../../Commun/CommunFunctions";
-import SearchCandidates from "../../pages/SearchCandidates";
-const candidatedata = require("../Jdd/CandidatData.json");
+import EmployeePage from "../../pages/EmployeePage";
 import fs from "fs";
 import path from "path";
+const candidatedata = require("../Jdd/CandidatData.json");
 const logindata = require("../Jdd/loginData.json");
 const dataExpect = require("../ExpectedResult/expectedresult.json");
-const communfunction = new CommunFunctions();
 const screenshotsDir = path.join(__dirname, "screenshots");
 
-test.describe("Add candidate", () => {
+test.describe("Vérification de la connexion", () => {
+  // Supprimer le dossier des captures d'écran avant l'exécution des tests de ce bloc
+  test.beforeAll(async () => {
+    if (fs.existsSync(screenshotsDir)) {
+      fs.rmdirSync(screenshotsDir, { recursive: true });
+    }
+  });
+
   test.beforeEach(async ({ page }) => {
     await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php");
   });
@@ -33,21 +39,29 @@ test.describe("Add candidate", () => {
     await page.close();
   });
 
-  test("Rechercher un candidat par nom complet", async ({ page }) => {
-    const searchCandidates = new SearchCandidates(page);
+  test("Ajouter un nouveau candidat avec certains champs", async ({ page }) => {
+    const employeePage = new EmployeePage(page);
+
+    //1- Je me connecte à mon appli en utilisant la fonction commune Login
     await CommunFunctions.login(
       page,
       logindata[0].username,
       logindata[0].password
     );
-    await CommunFunctions.goToViewCandidatesPage(page);
-    await searchCandidates.searchCandidatByFullName(
-      `${candidatedata.last_name}`
+
+    //2-J e vais sur la page de Gestion de candidats
+    await CommunFunctions.goToViewEmployeePage(page);
+
+    //3- je rajoute un nouveau candidat
+    await employeePage.addNewEmployee(
+      candidatedata.first_name,
+      candidatedata.last_name,
+      candidatedata.last_name,
+      ''
     );
-    await communfunction.elementIsVisible(searchCandidates.FullnameSearch);
-    await expect(searchCandidates.ActuelFullNameResult).toContainText(
-      `${candidatedata.first_name} ${candidatedata.last_name}`
-    );
+
+
+    await expect(employeePage.FullEmployeenamecheck).toContainText(dataExpect.pages.AddNewCandidatePage.CheckCandidateName);
     await CommunFunctions.logout(page);
-});
-});
+  });
+  });

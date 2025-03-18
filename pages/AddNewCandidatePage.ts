@@ -21,7 +21,9 @@ class AddNewCandidatePage {
   browseButton: Locator;
   saveButton: Locator;
   fullNameCheck: Locator;
-
+  RequiredFirstName: Locator;
+  RequiredLastName: Locator;
+  RequiredEmail: Locator;
   constructor(page: Page) {
     this.page = page;
 
@@ -38,7 +40,11 @@ class AddNewCandidatePage {
     this.phoneNumber = page.locator(selectors.phoneNumber);
     this.browseButton = page.locator(selectors.browseButton);
     this.saveButton = page.locator(selectors.saveButton);
-    this.fullNameCheck = page.locator(selectors.fullNameCheck);;
+    
+    this.fullNameCheck = selectors.fullNameCheck(page);
+    this.RequiredFirstName = page.locator(selectors.RequiredFirstName);
+    this.RequiredLastName = page.locator(selectors.RequiredLastName);
+    this.RequiredEmail = page.locator(selectors.RequiredEmail);
   }
 
   /**
@@ -53,14 +59,12 @@ class AddNewCandidatePage {
     lastname: string,
     email: string,
     phoneNumber: string
-  ) 
-  
-  {
+  ) {
     if (!fs.existsSync(filePath)) {
       throw new Error(`File not found: ${filePath}`);
     }
 
-      await this.addButton.waitFor({ state: "visible" });
+    await this.addButton.waitFor({ state: "visible" });
 
     await this.addButton.click();
     //atttendre que le firstname soit visible avant de le renseigner
@@ -76,8 +80,6 @@ class AddNewCandidatePage {
     await this.browseButton.setInputFiles(filePath);
     await this.saveButton.waitFor({ state: "visible" });
     await this.saveButton.click();
-
-
   }
 }
 
