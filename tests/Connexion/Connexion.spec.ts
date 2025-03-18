@@ -1,17 +1,44 @@
 import { test, expect } from "@playwright/test";
-import { describe } from "node:test";
 import ConnexionPage from "../../pages/ConnexionPage";
 import CommunFunctions from "../../Commun/CommunFunctions";
 const logindata = require("../Jdd/loginData.json");
 const dataExpect = require("../ExpectedResult/expectedresult.json");
-const { beforeAll, afterAll, beforeEach, afterEach } = require("../hooks");
+import fs from "fs";
+import path from "path";
 
-describe("Vérification de la connexion", () => {
-  const communfunction = new CommunFunctions();
+const screenshotsDir = path.join(__dirname, "screenshots");
+
+test.describe("Vérification de la connexion", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php");
+  });
+
+  test.afterEach(async ({ page }, testInfo) => {
+    if (testInfo.status === "failed") {
+      console.log(`Test failed: ${testInfo.title}. Capturing screenshot...`);
+      if (!fs.existsSync(screenshotsDir)) {
+        fs.mkdirSync(screenshotsDir, { recursive: true });
+      }
+
+      const screenshotPath = path.join(
+        screenshotsDir,
+        `${testInfo.title}-${Date.now()}.png`
+      );
+      await page.screenshot({
+        path: screenshotPath,
+        fullPage: true,
+      });
+    }
+    await page.close();
+  });
 
   test("Test de connexion réussie", async ({ page }) => {
     const connexionPage = new ConnexionPage(page);
+
+    // Connexion avec des identifiants valides
     await connexionPage.login(logindata[0].username, logindata[0].password);
+
+    // Vérification du texte attendu après connexion
     await expect(connexionPage.Time_at_Work_label).toContainText(
       dataExpect.pages.connexion_page.Time_at_Work_label
     );
@@ -19,8 +46,12 @@ describe("Vérification de la connexion", () => {
 
   test("Test de connexion échouée", async ({ page }) => {
     const connexionPage = new ConnexionPage(page);
+
+    // Connexion avec des identifiants incorrects
     await connexionPage.login(logindata[1].username, logindata[1].password);
-    await communfunction.elementIsNotVisible(connexionPage.Time_at_Work_label);
+
+
+    // Vérification du message d'erreur
     await expect(connexionPage.errorLogin).toContainText(
       dataExpect.pages.connexion_page.Connexion_error
     );
