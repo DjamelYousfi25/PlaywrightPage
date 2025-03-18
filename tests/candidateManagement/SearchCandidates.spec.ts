@@ -10,6 +10,13 @@ const communfunction = new CommunFunctions();
 const screenshotsDir = path.join(__dirname, "screenshots");
 
 test.describe("Add candidate", () => {
+
+     // Supprimer le dossier des captures d'écran avant l'exécution des tests de ce bloc
+      test.beforeAll(async () => {
+        if (fs.existsSync(screenshotsDir)) {
+          fs.rmdirSync(screenshotsDir, { recursive: true });
+        }
+      });
   test.beforeEach(async ({ page }) => {
     await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php");
   });
