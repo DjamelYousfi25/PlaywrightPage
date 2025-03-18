@@ -8,7 +8,7 @@ const logindata = require("../Jdd/loginData.json");
 const dataExpect = require("../ExpectedResult/expectedresult.json");
 const screenshotsDir = path.join(__dirname, "screenshots");
 
-test.describe("Vérification de la connexion", () => {
+test.describe("Employee management", () => {
   // Supprimer le dossier des captures d'écran avant l'exécution des tests de ce bloc
   test.beforeAll(async () => {
     if (fs.existsSync(screenshotsDir)) {
@@ -39,7 +39,7 @@ test.describe("Vérification de la connexion", () => {
     await page.close();
   });
 
-  test("Ajouter un nouveau candidat avec certains champs", async ({ page }) => {
+  test("Ajouter un nouveau employé avec certains champs", async ({ page }) => {
     const employeePage = new EmployeePage(page);
 
     //1- Je me connecte à mon appli en utilisant la fonction commune Login
@@ -60,6 +60,7 @@ test.describe("Vérification de la connexion", () => {
       ''
     );
 
+  await employeePage.FullEmployeenamecheck.waitFor();
 
     await expect(employeePage.FullEmployeenamecheck).toContainText(dataExpect.pages.AddNewCandidatePage.CheckCandidateName);
     await CommunFunctions.logout(page);

@@ -25,7 +25,7 @@ export const selectors = {
   phoneNumber: 'input[placeholder="Type here"]',
   browseButton: 'input[type="file"]',
   saveButton: 'button:has-text("Save")',
-  fullNameCheck: (page) => page.getByText('djamel yousfi', { exact: true }),
+  fullNameCheck: (page) => page.getByText("djamel yousfi", { exact: true }),
   RequiredFirstName:
     '//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div/div/div[2]/div[1]/span',
   RequiredLastName:
@@ -43,9 +43,8 @@ export const selectors = {
   Last_name: (page) => page.getByRole("textbox", { name: "Last Name" }),
   Employee_Id: (page) => page.locator("form").getByRole("textbox"),
   Save_button: (page) => page.getByRole("button", { name: "Save" }),
-  FullEmployeenamecheck: (page) =>page.getByRole('heading', { name: 'djamel mail@mail.com' }),
-
-
+  FullEmployeenamecheck: (page) =>
+    page.getByRole("heading", { name: "djamel mail@mail.com" }),
 
   //logout
   accountName: '//*[@id="app"]//header//ul//p',

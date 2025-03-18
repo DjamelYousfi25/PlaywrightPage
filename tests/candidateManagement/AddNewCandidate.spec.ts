@@ -60,9 +60,10 @@ test.describe("Gestion des candidats", () => {
       candidatedata.number_phone
     );
 
-    await page.waitForTimeout(5000); // 5000 millisecondes = 5 secondes
+    await addNewCandidatePage.fullNameCheck.waitFor();
+
     await expect(addNewCandidatePage.fullNameCheck).toContainText(
-      dataExpect.pages.AddNewCandidatePage.CheckCandidateName
+      dataExpect.pages.AddNewCandidatePage.CheckCandidateName, { timeout: 10000 }
     );
     await CommunFunctions.logout(page);
   });
