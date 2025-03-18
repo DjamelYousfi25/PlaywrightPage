@@ -42,17 +42,17 @@ test.describe("Gestion des candidats", () => {
   test("Ajouter un nouveau candidat avec certains champs", async ({ page }) => {
     const addNewCandidatePage = new AddNewCandidatePage(page);
 
-    //1- Je me connecte à mon appli en utilisant la fonction commune Login
+    // 1- Je me connecte à mon appli en utilisant la fonction commune Login
     await CommunFunctions.login(
       page,
       logindata[0].username,
       logindata[0].password
     );
 
-    //2-J e vais sur la page de Gestion de candidats
+    // 2- Je vais sur la page de Gestion de candidats
     await CommunFunctions.goToViewCandidatesPage(page);
 
-    //3- je rajoute un nouveau candidat
+    // 3- J'ajoute un nouveau candidat
     await addNewCandidatePage.addNewCandidate(
       candidatedata.first_name,
       candidatedata.last_name,

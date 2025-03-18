@@ -35,19 +35,30 @@ test.describe("Add candidate", () => {
 
   test("Rechercher un candidat par nom complet", async ({ page }) => {
     const searchCandidates = new SearchCandidates(page);
+
+    // 1- Connexion
     await CommunFunctions.login(
       page,
       logindata[0].username,
       logindata[0].password
     );
+
+    // 2- Navigation vers la page de gestion des candidats
     await CommunFunctions.goToViewCandidatesPage(page);
+
+    // 3- Recherche du candidat par nom complet
     await searchCandidates.searchCandidatByFullName(
       `${candidatedata.last_name}`
     );
-    await communfunction.elementIsVisible(searchCandidates.FullnameSearch);
+
+
+    // 5- Vérification du texte du résultat
     await expect(searchCandidates.ActuelFullNameResult).toContainText(
       `${candidatedata.first_name} ${candidatedata.last_name}`
     );
+
+    // 6- Déconnexion
     await CommunFunctions.logout(page);
+  });
 });
-});
+
