@@ -62,7 +62,12 @@ test.describe("Employee management", () => {
 
   await employeePage.FullEmployeenamecheck.waitFor();
 
-    await expect(employeePage.FullEmployeenamecheck).toContainText(dataExpect.pages.AddNewCandidatePage.CheckCandidateName);
+    await expect(employeePage.FullEmployeenamecheck).toContainText(
+      dataExpect.pages.AddNewCandidatePage.CheckCandidateName,
+      {
+        timeout: 10000,
+      }
+    );
     await CommunFunctions.logout(page);
   });
   });

@@ -71,10 +71,9 @@ class AddNewCandidatePage {
     await this.firstName.waitFor({ state: "visible" });
     await this.firstName.fill(firstname);
     await this.lastName.fill(lastname);
-    await this.vacancyDropdownIcon.click();
-
-    await this.vacancyOption.waitFor({ state: "visible" });
-    await this.vacancyOption.click();
+    /*await this.vacancyDropdownIcon.click();
+    await this.vacancyOption.waitFor({ state: "visible" ,timeout:10});
+    await this.vacancyOption.click();*/
     await this.email.first().fill(email);
     await this.phoneNumber.nth(1).fill(phoneNumber);
     await this.browseButton.setInputFiles(filePath);

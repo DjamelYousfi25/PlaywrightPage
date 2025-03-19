@@ -8,7 +8,9 @@ const logindata = require("../Jdd/loginData.json");
 const dataExpect = require("../ExpectedResult/expectedresult.json");
 const screenshotsDir = path.join(__dirname, "screenshots");
 
+
 describe("Vérification de la connexion", () => {
+
 
     // Supprimer le dossier des captures d'écran avant l'exécution des tests de ce bloc
     test.beforeAll(async () => {
@@ -48,6 +50,7 @@ test.afterEach(async ({ page }, testInfo) => {
 
     // Connexion avec des identifiants valides
     await connexionPage.login(logindata[0].username, logindata[0].password);
+
 
     // Vérification du texte attendu après connexion
     await expect(connexionPage.Time_at_Work_label).toContainText(

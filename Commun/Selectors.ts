@@ -3,11 +3,14 @@ export const selectors = {
   // Login page
   username: 'input[name="username"]', // Retourne une chaîne de caractères
   password: 'input[name="password"]', // Retourne une chaîne de caractères
+  //username: (page) => page.getByRole("textbox", { name: "Username" }),
+  //password: (page) => page.getByRole("textbox", { name: "Password" }),
+
   loginButton: 'button[type="submit"]', // Retourne une chaîne de caractères
   recrutementLink: '//*[@id="app"]//aside//li[5]/a', // Exemple de sélecteur pour un lien
   Time_at_Work_label: "#app", // Exemple de sélecteur pour un label
   //errorLogin: '//*[@id="app"]//div[1]/p',
-  errorLogin:(page)=>page.getByText("Invalid credentials"),
+  errorLogin: (page) => page.getByText("Invalid credentials"),
 
   // Search Candidate page (view candidate)
   FullnameSearch: 'input[placeholder="Type for hints..."]',
@@ -50,6 +53,8 @@ export const selectors = {
     page.getByRole("heading", { name: "djamel mail@mail.com" }),
 
   //logout
+  accountNameImg: (page) =>
+    page.getByRole("banner").getByRole("img", { name: "profile picture" }),
   accountName: '//*[@id="app"]//header//ul//p',
   Logout: '//*[@id="app"]//header//ul/li/ul/li[4]/a',
 };

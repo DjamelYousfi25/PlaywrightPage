@@ -14,8 +14,14 @@ class CommunFunctions {
   static async login(page: Page, username: string, password: string) {
     await page.waitForSelector(selectors.username);
     await page.waitForSelector(selectors.password);
-    await page.fill(selectors.username, username);
+     await page.fill(selectors.username, username);
     await page.fill(selectors.password, password);
+
+ /* await selectors.username(page).waitFor();
+  await selectors.password(page).waitFor();
+  selectors.username(page).fill(username);
+  selectors.password(page).fill(password);*/
+  //  await page.fill(selectors.password(page), password);
     await page.click(selectors.loginButton);
   }
 
@@ -24,7 +30,8 @@ class CommunFunctions {
    * @param {Page} page - L'instance de la page Playwright.
    */
   static async logout(page: Page) {
-    await page.click(selectors.accountName);
+    await selectors.accountNameImg(page).click();
+    //await page.click(selectors.accountName);
     await page.waitForSelector(selectors.Logout);
     await page.click(selectors.Logout);
   }
@@ -41,23 +48,6 @@ class CommunFunctions {
     await page.click(selectors.PimLink);
   }
 
-  /**
-   * Vérifie si un élément est visible.
-   * @param {Locator} locator - Le locator de l'élément à vérifier.
-   * @returns {Promise<boolean>} - True si l'élément est visible, sinon False.
-   */
-  async elementIsVisible(locator: Locator): Promise<boolean> {
-    return await locator.isVisible();
-  }
-
-  /**
-   * Vérifie si un élément n'est pas visible.
-   * @param {Locator} locator - Le locator de l'élément à vérifier.
-   * @returns {Promise<boolean>} - True si l'élément n'est pas visible, sinon False.
-   */
-  async elementIsNotVisible(locator: Locator): Promise<boolean> {
-    return !(await locator.isVisible());
-  }
 }
 
 export default CommunFunctions;;
