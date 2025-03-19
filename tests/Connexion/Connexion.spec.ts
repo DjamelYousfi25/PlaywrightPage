@@ -64,7 +64,10 @@ test.afterEach(async ({ page }, testInfo) => {
 
     // Vérification du message d'erreur
     await expect(connexionPage.errorLogin).toContainText(
-      dataExpect.pages.connexion_page.Connexion_error
+      dataExpect.pages.connexion_page.Connexion_error,
+      {
+        timeout: 10000,
+      }
     );
   });
 });

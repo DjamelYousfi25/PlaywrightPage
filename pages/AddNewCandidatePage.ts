@@ -35,7 +35,7 @@ class AddNewCandidatePage {
     this.vacancyDropdownIcon = page
       .locator(selectors.vacancyDropdownIcon)
       .first();
-    this.vacancyOption = page.locator(selectors.vacancyOption);
+    this.vacancyOption = selectors.vacancyOption(page);
     this.email = page.locator(selectors.email);
     this.phoneNumber = page.locator(selectors.phoneNumber);
     this.browseButton = page.locator(selectors.browseButton);

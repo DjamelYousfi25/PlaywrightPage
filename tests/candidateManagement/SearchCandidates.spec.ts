@@ -9,7 +9,7 @@ const dataExpect = require("../ExpectedResult/expectedresult.json");
 const communfunction = new CommunFunctions();
 const screenshotsDir = path.join(__dirname, "screenshots");
 
-test.describe("Add candidate", () => {
+test.describe("Rechercher un candidat", () => {
 
      // Supprimer le dossier des captures d'écran avant l'exécution des tests de ce bloc
       test.beforeAll(async () => {

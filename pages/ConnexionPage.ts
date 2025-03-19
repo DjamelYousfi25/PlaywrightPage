@@ -16,7 +16,9 @@ class ConnexionPage {
   constructor(page: Page) {
     this.page = page;
 
-    this.errorLogin = page.locator(selectors.errorLogin);
+//    this.errorLogin = page.locator(selectors.errorLogin(page));
+
+      this.errorLogin = selectors.errorLogin(page);
     this.Time_at_Work_label = page.locator(selectors.Time_at_Work_label);
     //this.check_connect_ok = page.locator( '//*[@id="app"]/div[1]/div[2]/div[2]/div/div[2]/div/div[1]/div/p' );
 

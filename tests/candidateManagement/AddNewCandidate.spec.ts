@@ -65,6 +65,9 @@ test.describe("Gestion des candidats", () => {
     await expect(addNewCandidatePage.fullNameCheck).toContainText(
       dataExpect.pages.AddNewCandidatePage.CheckCandidateName, { timeout: 10000 }
     );
+
+
+    
     await CommunFunctions.logout(page);
   });
 

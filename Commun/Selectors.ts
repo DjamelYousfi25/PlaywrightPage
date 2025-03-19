@@ -6,7 +6,8 @@ export const selectors = {
   loginButton: 'button[type="submit"]', // Retourne une chaîne de caractères
   recrutementLink: '//*[@id="app"]//aside//li[5]/a', // Exemple de sélecteur pour un lien
   Time_at_Work_label: "#app", // Exemple de sélecteur pour un label
-  errorLogin: '//*[@id="app"]//div[1]/p',
+  //errorLogin: '//*[@id="app"]//div[1]/p',
+  errorLogin:(page)=>page.getByText("Invalid credentials"),
 
   // Search Candidate page (view candidate)
   FullnameSearch: 'input[placeholder="Type for hints..."]',
@@ -20,7 +21,9 @@ export const selectors = {
   firstName: 'input[name="firstName"]',
   lastName: 'input[name="lastName"]',
   vacancyDropdownIcon: ".oxd-select-text--arrow",
-  vacancyOption: 'text="Junior Account Assistant"',
+  //vacancyOption: 'text="Senior QA Lead',
+  vacancyOption: (page) => page.getByText("Senior QA Lead"),
+
   email: 'input[placeholder="Type here"]',
   phoneNumber: 'input[placeholder="Type here"]',
   browseButton: 'input[type="file"]',
