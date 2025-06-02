@@ -13,11 +13,11 @@ describe("Vérification de la connexion", () => {
 
 
     // Supprimer le dossier des captures d'écran avant l'exécution des tests de ce bloc
-    test.beforeAll(async () => {
+ /*   test.beforeAll(async () => {
       if (fs.existsSync(screenshotsDir)) {
         fs.rmdirSync(screenshotsDir, { recursive: true });
       }
-    });
+    });*/
 
   test.beforeEach(async ({ page }) => {
   await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php");

@@ -10,16 +10,16 @@ const screenshotsDir = path.join(__dirname, "screenshots");
 
 test.describe("Gestion des candidats", () => {
   // Supprimer le dossier des captures d'écran avant l'exécution des tests de ce bloc
-  test.beforeAll(async () => {
+  /*test.beforeAll(async () => {
     if (fs.existsSync(screenshotsDir)) {
       fs.rmdirSync(screenshotsDir, { recursive: true });
     }
-  });
+  });*/
 
   test.beforeEach(async ({ page }, testInfo) => {
     await page.goto("/web/index.php");
     console.log(
-      `Les tests sont lancés sur l’environnement : ${testInfo.project.name}`
+      `✅  Les tests sont lancés sur l’environnement : ${testInfo.project.name}`
     );
   });
 

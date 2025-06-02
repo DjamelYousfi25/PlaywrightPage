@@ -9,15 +9,18 @@ const dataExpect = require("../ExpectedResult/expectedresult.json");
 const screenshotsDir = path.join(__dirname, "screenshots");
 
 test.describe("Employee management", () => {
-  // Supprimer le dossier des captures d'écran avant l'exécution des tests de ce bloc
+/*  // Supprimer le dossier des captures d'écran avant l'exécution des tests de ce bloc
   test.beforeAll(async () => {
     if (fs.existsSync(screenshotsDir)) {
       fs.rmdirSync(screenshotsDir, { recursive: true });
     }
-  });
+  });*/
 
-  test.beforeEach(async ({ page }) => {
-    await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php");
+  test.beforeEach(async ({ page }, testInfo) => {
+    console.log(
+      `✅  Les tests sont lancés sur l’environnement : ${testInfo.project.name}`
+    );
+    await page.goto("/web/index.php");
   });
 
   test.afterEach(async ({ page }, testInfo) => {
