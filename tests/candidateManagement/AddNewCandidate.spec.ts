@@ -17,7 +17,7 @@ test.describe("Gestion des candidats", () => {
   });
 
   test.beforeEach(async ({ page }) => {
-    await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php");
+    await page.goto("/web/index.php");
   });
 
   test.afterEach(async ({ page }, testInfo) => {

@@ -26,11 +26,12 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: "https://opensource-demo.orangehrmlive.com/web/index.php",
+    //
+    // baseURL: "https://opensource-demo.orangehrmlive.com/web/index.php",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
-    headless: true,
+    headless: false,
   },
 
   /* Configure projects for major browsers */
@@ -50,7 +51,20 @@ export default defineConfig({
       use: { ...devices["Desktop Safari"] },
     },
 
-  /*  {
+    {
+      name: "test",
+      use: {
+        baseURL: "https://opensource-qa-demo.orangehrmlive.com/",
+      },
+    },
+
+    {
+      name: "preprod",
+      use: {  baseURL: "https://opensource-pp-demo.orangehrmlive.com/",
+      },
+    },
+
+    /*  {
       name: "iPhone 15 Pro",
       use: { ...devices["iPhone 15 Pro"] },
     },*/
