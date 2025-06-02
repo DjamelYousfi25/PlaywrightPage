@@ -1,5 +1,4 @@
 import { test, expect } from "@playwright/test";
-import { describe } from "node:test";
 import ConnexionPage from "../../pages/ConnexionPage";
 import CommunFunctions from "../../Commun/CommunFunctions";
 import fs from "fs";
@@ -9,7 +8,7 @@ const dataExpect = require("../ExpectedResult/expectedresult.json");
 const screenshotsDir = path.join(__dirname, "screenshots");
 
 
-describe("Vérification de la connexion", () => {
+test.describe("Vérification de la connexion", () => {
 
 
     // Supprimer le dossier des captures d'écran avant l'exécution des tests de ce bloc
@@ -19,9 +18,12 @@ describe("Vérification de la connexion", () => {
       }
     });*/
 
-  test.beforeEach(async ({ page }) => {
-  await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php");
-});
+  test.beforeEach(async ({ page }, testInfo) => {
+    await page.goto("/web/index.php");
+    console.log(
+      `✅  Les tests sont lancés sur l’environnement : ${testInfo.project.name}`
+    );
+  });
 
 test.afterEach(async ({ page }, testInfo) => {
   if (testInfo.status === "failed") {
