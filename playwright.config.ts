@@ -52,7 +52,7 @@ export default defineConfig({
     },
 
     {
-      name: "test",
+      name: "qa",
       use: {
         baseURL: "https://opensource-qa-demo.orangehrmlive.com/",
       },

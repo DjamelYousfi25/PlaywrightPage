@@ -3,76 +3,62 @@ import ConnexionPage from "../../pages/ConnexionPage";
 import CommunFunctions from "../../Commun/CommunFunctions";
 import fs from "fs";
 import path from "path";
+
 const logindata = require("../Jdd/loginData.json");
 const dataExpect = require("../ExpectedResult/expectedresult.json");
 const screenshotsDir = path.join(__dirname, "screenshots");
 
-
 test.describe("Vérification de la connexion", () => {
-
-
-    // Supprimer le dossier des captures d'écran avant l'exécution des tests de ce bloc
- /*   test.beforeAll(async () => {
-      if (fs.existsSync(screenshotsDir)) {
-        fs.rmdirSync(screenshotsDir, { recursive: true });
-      }
-    });*/
+  // Si tu veux supprimer les anciennes captures avant les tests, décommente ici :
+  /*
+  test.beforeAll(async () => {
+    if (fs.existsSync(screenshotsDir)) {
+      fs.rmdirSync(screenshotsDir, { recursive: true });
+    }
+  });
+  */
 
   test.beforeEach(async ({ page }, testInfo) => {
     await page.goto("/web/index.php");
-    console.log(
-      `✅  Les tests sont lancés sur l’environnement : ${testInfo.project.name}`
-    );
+    console.log(`✅ Test lancé sur : ${testInfo.project.name}`);
   });
 
-test.afterEach(async ({ page }, testInfo) => {
-  if (testInfo.status === "failed") {
-    console.log(`Test failed: ${testInfo.title}. Capturing screenshot...`);
-    if (!fs.existsSync(screenshotsDir)) {
-      fs.mkdirSync(screenshotsDir, { recursive: true });
+  test.afterEach(async ({ page }, testInfo) => {
+    if (testInfo.status === "failed") {
+      console.log(`❌ Test échoué : ${testInfo.title} — capture d'écran...`);
+      if (!fs.existsSync(screenshotsDir)) {
+        fs.mkdirSync(screenshotsDir, { recursive: true });
+      }
+
+      const safeTitle = testInfo.title.replace(/[^a-zA-Z0-9_\-]/g, "_");
+      const screenshotPath = path.join(
+        screenshotsDir,
+        `${safeTitle}-${Date.now()}.png`
+      );
+      await page.screenshot({ path: screenshotPath, fullPage: true });
     }
 
-    const screenshotPath = path.join(
-      screenshotsDir,
-      `${testInfo.title}-${Date.now()}.png`
-    );
-    await page.screenshot({
-      path: screenshotPath,
-      fullPage: true,
-    });
-  }
-  await page.close();
-});
+    await page.close();
+  });
 
-
-  const communfunction = new CommunFunctions();
-
-  test("Test de connexion réussie", async ({ page }) => {
+  test("Connexion réussie avec identifiants valides", async ({ page }) => {
     const connexionPage = new ConnexionPage(page);
 
-    // Connexion avec des identifiants valides
     await connexionPage.login(logindata[0].username, logindata[0].password);
 
-
-    // Vérification du texte attendu après connexion
     await expect(connexionPage.Time_at_Work_label).toContainText(
       dataExpect.pages.connexion_page.Time_at_Work_label
     );
   });
 
-  test("Test de connexion échouée", async ({ page }) => {
+  test("Connexion échouée avec identifiants invalides", async ({ page }) => {
     const connexionPage = new ConnexionPage(page);
 
-    // Connexion avec des identifiants incorrects
     await connexionPage.login(logindata[1].username, logindata[1].password);
 
-
-    // Vérification du message d'erreur
     await expect(connexionPage.errorLogin).toContainText(
       dataExpect.pages.connexion_page.Connexion_error,
-      {
-        timeout: 10000,
-      }
+      { timeout: 10000 }
     );
   });
 });
