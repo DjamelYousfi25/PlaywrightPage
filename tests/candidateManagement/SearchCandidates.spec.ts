@@ -17,8 +17,11 @@ test.describe("Rechercher un candidat", () => {
           fs.rmdirSync(screenshotsDir, { recursive: true });
         }
       });
-  test.beforeEach(async ({ page }) => {
-    await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php");
+  test.beforeEach(async ({ page }, testInfo) => {
+    await page.goto("/web/index.php");
+    console.log(
+      `✅  Les tests sont lancés sur l’environnement : ${testInfo.project.name}`
+    );
   });
 
   test.afterEach(async ({ page }, testInfo) => {

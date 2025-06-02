@@ -16,8 +16,11 @@ test.describe("Gestion des candidats", () => {
     }
   });
 
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page }, testInfo) => {
     await page.goto("/web/index.php");
+    console.log(
+      `Les tests sont lancés sur l’environnement : ${testInfo.project.name}`
+    );
   });
 
   test.afterEach(async ({ page }, testInfo) => {
